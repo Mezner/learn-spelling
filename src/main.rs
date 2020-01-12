@@ -74,8 +74,8 @@ fn generate_audio(text: &str) {
         output_format: String::from("ogg_vorbis"),
         sample_rate: None,
         speech_mark_types: None,
-        text: String::from(text),
-        text_type: None,
+        text: format!("<speak>{word}<break time=\"1s\"/><prosody rate=\"slow\">{word}</prosody></speak>", word = text),
+        text_type: Some(String::from("ssml")),
         voice_id: String::from("Joanna"),
     };
     let future = client.synthesize_speech(task);
